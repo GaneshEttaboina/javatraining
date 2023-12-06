@@ -3,9 +3,11 @@ package com.lnt.day3;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public  class Employee implements Comparable<Employee> {
     int id;
@@ -71,7 +73,9 @@ public  class Employee implements Comparable<Employee> {
         Employee e3 = new Employee(1, "Amit", 53433);
         Employee e4 = new Employee(2, "Bhanu", 23433);
 
-        Set<Employee> employees = new HashSet<>();
+        // Set<Employee> employees = new HashSet<>();
+        // Set<Employee> employees = new LinkedHashSet<>();
+        Set<Employee> employees = new TreeSet<>(new SalaryComparator());
         employees.add(e1);
         employees.add(e2);
         employees.add(e3);
