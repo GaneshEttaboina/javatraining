@@ -2,11 +2,15 @@ package com.lnt.day3;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 public  class Employee implements Comparable<Employee> {
     int id;
     String name;
-    double salary;
+    Double salary;
 
 
     public Employee(int id, String name, double salary) {
@@ -61,24 +65,26 @@ public  class Employee implements Comparable<Employee> {
 
 
     public static void main(String[] args) {
-        Employee e1 = new Employee(12, "Ravi", 33433);
-        Employee e2 = new Employee(11, "Priya", 33433);
-        Employee e3 = new Employee(1, "Amit", 33433);
-        Employee e4 = new Employee(2, "Bhanu", 33433);
+        Employee e1 = new Employee(12, "Ravi", 13433);
+        Employee e5 = new Employee(12, "Ravi", 13433);
+        Employee e2 = new Employee(11, "Priya", 43433);
+        Employee e3 = new Employee(1, "Amit", 53433);
+        Employee e4 = new Employee(2, "Bhanu", 23433);
 
-        ArrayList<Employee> employees = new ArrayList<>();
+        Set<Employee> employees = new HashSet<>();
         employees.add(e1);
         employees.add(e2);
         employees.add(e3);
         employees.add(e4);
+        employees.add(e5);
 
-        System.out.println(employees);
+        // System.out.println(employees);
 
-        Collections.sort(employees);
+        System.out.println(employees.contains(new Employee(11, "Priya", 43433) ));
 
-        System.out.println(employees);
-
-        System.out.println(e1.equals(e2));
+        for(Employee e : employees){
+            System.out.println(e);
+        }
     }
 
 
