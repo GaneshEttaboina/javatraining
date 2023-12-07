@@ -17,7 +17,11 @@ public class ExceptionDemo {
             // System.out.println;
             e.printStackTrace();
         } 
+        finally{
+            
+        }
         
+        System.out.println("test");
 
         try{
             System.out.println(x/y);
