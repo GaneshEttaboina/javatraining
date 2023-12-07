@@ -42,6 +42,17 @@ public class Bank {
 
         System.out.println(bank);
     }
+    public static boolean findBankBranch(Map<String,Bank> banks,String bankName,String branchName){
+        Bank bank =  banks.get(bankName);
+        if(bank!=null){
+            for(Branch b :  bank.branches){
+                if(b.location.equals(branchName)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     
 
@@ -96,6 +107,6 @@ public class Bank {
     printBankDetails(banks, "HDFC");
 
     addBranchToBank(banks, "HDFC", new Branch("South Ex", 3));
-
+        System.out.println(findBankBranch(banks,"HDFC", "South Ex"));
     }
 }
