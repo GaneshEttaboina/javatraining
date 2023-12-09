@@ -5,13 +5,13 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-<!-- 
-<context:component-scan base-package="com.mc"></context:component-scan>
- -->
 
- <bean id="a" class="com.lnt.A">
+<context:component-scan base-package="com.lnt"></context:component-scan>
+
+
+ <!-- <bean id="a" class="com.lnt.A">
     <constructor-arg ref="b"></constructor-arg>
  </bean>
- <bean id="b" class="com.lnt.B"></bean>
+ <bean id="b" class="com.lnt.B"></bean> -->
 
 </beans>
