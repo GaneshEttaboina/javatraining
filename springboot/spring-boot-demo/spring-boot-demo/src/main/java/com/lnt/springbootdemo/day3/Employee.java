@@ -1,5 +1,6 @@
 package com.lnt.springbootdemo.day3;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,9 +11,11 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
+	
+//	@Column(unique = true)
     String name;
     double salary;
-
+    
     public Employee(){
     
     }

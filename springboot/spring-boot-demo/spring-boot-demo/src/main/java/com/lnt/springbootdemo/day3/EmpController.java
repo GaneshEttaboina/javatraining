@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 //import java.util.*;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -34,12 +36,19 @@ public class EmpController {
     public List<Employee> getEmployees(){
     //    return new Employee(32, "Priya", 34343.34);
         // return employeeMap.entrySet();
-        List<Employee> employees = new ArrayList<>();
-        for(Integer key : employeeMap.keySet()){
-            employees.add(employeeMap.get(key));
-        }
+//        List<Employee> employees = new ArrayList<>();
+//        for(Integer key : employeeMap.keySet()){
+//            employees.add(employeeMap.get(key));
+//        }
 
-        return employees;
+        return employeeRepository.findAll();
+    }
+    
+    @GetMapping("/employees/find")
+    public List<Employee> getEmployeeByName(@RequestParam("name") String name) {
+    	List<Employee> emp = employeeRepository.findByName(name);
+//    	employeeRepository.del
+    	return emp;
     }
 
     @GetMapping("/employees/{id}")
@@ -55,9 +64,11 @@ public class EmpController {
         //     }
         // }
     
-        Employee e =  employeeMap.get(id);
-        if(e != null){
-             re = new ResponseEntity<>(e, HttpStatus.OK);
+//        Employee e =  employeeMap.get(id);
+//        employeeRepository.findBy
+        Optional<Employee> employeeFound = employeeRepository.findById(id);
+        if(employeeFound.isPresent()){
+             re = new ResponseEntity<>(employeeFound.get(), HttpStatus.OK);
              return re;
         }
         else
@@ -97,7 +108,7 @@ public class EmpController {
     	// employee.id=id;
     	// employee.name="Rakesh";
     	// employee.salary=6675;
-
+        
         Employee e = employeeMap.get(id);
         ResponseEntity<Void> re = null;
         if(e == null){
@@ -109,8 +120,7 @@ public class EmpController {
          re = new ResponseEntity<>(HttpStatus.OK);
              return re;
 
-    }
-
-
-    
+        }
 }
+             
+     //  public interface EmployeeService 
