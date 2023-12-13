@@ -6,5 +6,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-	List<Employee> findByName(String name);
+	List<Employee> findByNameLike(String name);
+
+	List<Employee> findTop3ByOrderBySalary();
+
+	List<Employee> findByNameContaining(String infix);
+
+    List<Employee> findByName1(String likePattern1);
+
+	List<Employee> empsWithLowestSalary();
+	
+
+	//List<Employee> findTopBySalary(double salary);
+//	List<Employee> findByAge(int age);
 }
