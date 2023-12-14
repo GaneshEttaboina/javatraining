@@ -15,8 +15,11 @@ import com.lnt.workoutapp.entities.Category;
 import com.lnt.workoutapp.repos.CategoryRepository;
 import com.lnt.workoutapp.repos.WorkoutRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/api/v1/workouts")
+@Slf4j
 public class WorkoutController {
     @Autowired
     WorkoutRepository workoutRepository;
@@ -29,6 +32,9 @@ public class WorkoutController {
         // if category id is present .. load that object
         int categoryId = workout.getCategory().getId();
 
+        log.warn("Category is : " + categoryId);
+        System.out.println("Category is : " + categoryId);
+
         if(categoryId > 0){
            Optional<Category> categoryFound =  categoryRepository.findById(categoryId);
            if(categoryFound.isPresent()){
@@ -36,7 +42,6 @@ public class WorkoutController {
            }
         }
         
+        
         workoutRepository.save(workout);
-    }
-    
-}
+    }}
