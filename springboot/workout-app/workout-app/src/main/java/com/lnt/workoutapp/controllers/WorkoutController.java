@@ -25,7 +25,7 @@ public class WorkoutController {
     WorkoutRepository workoutRepository;
     @Autowired
     CategoryRepository categoryRepository;
-
+    
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public void createWorkout(@RequestBody Workout workout){

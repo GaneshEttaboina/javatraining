@@ -23,5 +23,8 @@ public class ActiveWorkout {
     @OneToOne
     Workout workout;
     
+    @OneToOne
+    User user;
+    
 }
 
