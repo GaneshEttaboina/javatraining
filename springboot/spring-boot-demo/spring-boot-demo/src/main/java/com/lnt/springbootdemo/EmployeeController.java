@@ -25,6 +25,9 @@ public class EmployeeController {
 
     // static List<Employee> employees = new ArrayList<>();
     Map<Integer, Employee> employeeMap = new HashMap<>();
+    {
+    	employeeMap.put(32, new Employee(32, "Priya", 34343.34));
+    }
 
     @GetMapping("/employees")
     public List<Employee> getEmployees(){

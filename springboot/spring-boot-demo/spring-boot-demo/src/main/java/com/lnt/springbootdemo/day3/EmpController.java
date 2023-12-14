@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 //import java.util.*;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Employee API", description = "Employee management APIs")
 @RestController
 @RequestMapping("/api/v1")
 public class EmpController {
@@ -31,6 +40,14 @@ public class EmpController {
 
 	private Collection<Employee> employees;
 
+	@Operation(
+		      summary = "Retrieve a Employee by Id",
+		      description = "Get a Emmployee object by specifying its id. The response is Employee object with id, title, description and published status.",
+		      tags = { "tutorials", "get" })
+		  @ApiResponses({
+		      @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Employee.class), mediaType = "application/json") }),
+		      @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+		      @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@GetMapping("/employees")
 	public List<Employee> getEmployees() {
 		// return new Employee(32, "Priya", 34343.34);
@@ -44,7 +61,7 @@ public class EmpController {
 }
 	@GetMapping("/employees/find")
 	public List<Employee> getEmployeeByName(@RequestParam("name") String name) {
-		List<Employee> emp = employeeRepository.findByName1(name);
+		List<Employee> emp = employeeRepository.findByName(name);
 
 		return emp;
 	}

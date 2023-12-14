@@ -12,9 +12,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 	List<Employee> findByNameContaining(String infix);
 
-    List<Employee> findByName1(String likePattern1);
+    List<Employee> findByName(String likePattern1);
 
-	List<Employee> empsWithLowestSalary();
+	// List<Employee> empsWithLowestSalary();
 	
 
 	//List<Employee> findTopBySalary(double salary);
