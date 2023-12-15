@@ -15,6 +15,10 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+
+import com.lnt.springsecuritydemo.filters.JWTTokenGeneratorFilter;
+import com.lnt.springsecuritydemo.filters.JWTTokenValidatorFilter;
+
 import org.springframework.security.config.Customizer;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,13 +45,13 @@ public class ProjectSecurityConfig {
             }
                 })).csrf((csrf) -> csrf.disable())
 
-                // .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
-                // .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests)->requests
-                        // .requestMatchers("/api/v1/employees").hasRole("ADMIN")
-                        // .requestMatchers("/user").authenticated()
+                        .requestMatchers("/api/v1/test").hasRole("ADMIN")
+                        .requestMatchers( "/user").authenticated()
 //                        .requestMatchers("/api/v1/employees").authenticated()
-                        .requestMatchers("/register", "/api/v1/test").permitAll())
+                        .requestMatchers("/register").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();

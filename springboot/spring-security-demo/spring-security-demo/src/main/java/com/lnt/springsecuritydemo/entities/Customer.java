@@ -32,9 +32,9 @@ public class Customer {
     @Column(name = "create_dt")
     private String createDt;
 
-    // @JsonIgnore
-    // @OneToMany(mappedBy="customer",fetch=FetchType.EAGER)
-    // private Set<Authority> authorities;
+    @JsonIgnore
+    @OneToMany(mappedBy="customer",fetch=FetchType.EAGER)
+    private Set<Authority> authorities;
 
     public int getId() {
         return id;
@@ -59,11 +59,11 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
     public String getMobileNumber() {
         return mobileNumber;
     }
-
+    
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
@@ -92,12 +92,12 @@ public class Customer {
         this.createDt = createDt;
     }
 
-    // public Set<Authority> getAuthorities() {
-    //     return authorities;
-    // }
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
 
-    // public void setAuthorities(Set<Authority> authorities) {
-    //     this.authorities = authorities;
-    // }
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
 }
 
