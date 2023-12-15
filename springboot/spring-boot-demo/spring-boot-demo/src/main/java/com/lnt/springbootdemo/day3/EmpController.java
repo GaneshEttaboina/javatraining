@@ -1,6 +1,6 @@
 package com.lnt.springbootdemo.day3;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,86 +28,48 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+
+
 @Tag(name = "Employee API", description = "Employee management APIs")
-@RestController
-@RequestMapping("/api/v1")
+@RestController 
+@RequestMapping("/api/v1") 
 public class EmpController {
 
+	
 	@Autowired
 	EmployeeRepository employeeRepository;
 
 	// static List<Employee> employees = new ArrayList<>();
 	Map<Integer, Employee> employeeMap = new HashMap<>();
 
-	private Collection<Employee> employees;
-
 	@Operation(
-		      summary = "Retrieve a Employee by Id",
+		      summary = "Retrieve a Employees",
 		      description = "Get a Emmployee object by specifying its id. The response is Employee object with id, title, description and published status.",
-		      tags = { "tutorials", "get" })
+		      tags = { "employee", "get" })
 		  @ApiResponses({
 		      @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Employee.class), mediaType = "application/json") }),
 		      @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
 		      @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@GetMapping("/employees")
 	public List<Employee> getEmployees() {
-		// return new Employee(32, "Priya", 34343.34);
-		// return employeeMap.entrySet();
-//        List<Employee> employees = new ArrayList<>();
-//        for(Integer key : employeeMap.keySet()){
-//            employees.add(employeeMap.get(key));
-//        }
-
 		return employeeRepository.findAll();
-}
-	@GetMapping("/employees/find")
+    }
+
+	@GetMapping("/employees/find") // '/api/v1/employees/find?NAME=AG' THIS IS REQUEST PARAM, taking fields using query param from path of url
 	public List<Employee> getEmployeeByName(@RequestParam("name") String name) {
 		List<Employee> emp = employeeRepository.findByName(name);
 
 		return emp;
 	}
 	
-
-	@GetMapping("/employees/findt")
-	public List<Employee> getEmployeeByTop() {
-		List<Employee> emp = employeeRepository.findTop3ByOrderBySalary();
-
-		return emp;
-	}
-	
-	@GetMapping("/employees/likepattern")
-	public List<Employee> findByNameLike() 
-	{
-		String likePattern1 = "d%k";
-		List<Employee> hemp = employeeRepository.findByNameLike(likePattern1);
-
-        return hemp;
-	}
-	
-
-	@GetMapping("/employees/infix")
-	List<Employee> findByNameContaining()  {
-		String infix ="p";
-		List<Employee> iemp = employeeRepository.findByNameContaining(infix);
-
-		return iemp;
-	}
-	
-//	@GetMapping("/employees/lowsalary")
-//	List<Employee> empsWithLowestSalary()
-//	{
-//		List<Employee> emp0 = employeeRepository.empsWithLowestSalary();
+//	@GetMapping("/employees/find")
+//	public List<Employee> getEmployeeByTop(@RequestParam("Salary") double Salary ) {
+//		List<Employee> emp = employeeRepository.findTopBySalary(Salary);
 //
-//		return emp0;
-//		 
+//		return emp;
 //	}
-	
-	
-	
-	
-	
 
-	@GetMapping("/employees/{id}")
+	@GetMapping("/employees/{id}")  // ''/api/v1/employees/find/26' taking id from path of the url'
 	public ResponseEntity<Employee> getAnEmployee(@PathVariable("id") int id) {
 		System.out.println("Id is : " + id);
 		// return
@@ -129,7 +92,8 @@ public class EmpController {
 			re = new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return re;
 	}
-	@PostMapping("/employees")
+
+	@PostMapping("/employees") 
 	public ResponseEntity<Void> createEmployee(@RequestBody Employee employee) {
 
 		ResponseEntity<Void> re = null;
@@ -153,8 +117,8 @@ public class EmpController {
 	 * return new ResponseEntity<>(HttpStatus.OK); }
 	 */
 //    
-	@PutMapping("/employees/{id}")
-	public ResponseEntity<Void> updateEmployee(@PathVariable("id") int id, @RequestBody Employee employee) {
+	@PutMapping("/employees/{id}")                                   
+	public ResponseEntity<Void> updateEmployee(@PathVariable("id") int id, @RequestBody  Employee    employee) {
 
 		ResponseEntity<Void> re = null;
 		Optional<Employee> employeeFound = employeeRepository.findById(id);
@@ -188,6 +152,5 @@ public class EmpController {
 
 	}
 }
-
 
 // public interface EmployeeService
