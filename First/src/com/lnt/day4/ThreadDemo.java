@@ -17,6 +17,8 @@ public class ThreadDemo {
         Thread t1 = new Thread(new MyTask());
         t1.start();
 
+        Thread t2 = new Thread(()-> System.out.println(Thread.currentThread().getName()));
+
         System.out.println("Main method executed by " + Thread.currentThread().getName());
     }
 }

@@ -1,11 +1,14 @@
 package com.lnt.day4;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -107,17 +110,28 @@ public  class Employee implements Comparable<Employee> {
         employees.add(e4);
         employees.add(e5);
 
+        employees.stream()
+        .filter((e)-> e.salary > 30000)
+        .map(e-> e.salary)
+        .sorted()
+        .forEach(System.out::println);
+
+        
+        System.out.println(LocalDateTime.now());
+
+        // .forEach(e-> System.out.println(e));
+
         // System.out.println(employees);
 
-        System.out.println(employees.contains(new Employee(11, "Priya", 43433) ));
+        // System.out.println(employees.contains(new Employee(11, "Priya", 43433) ));
 
-        for(Employee e : employees){
-            // create a thread 
+        // for(Employee e : employees){
+        //     // create a thread 
              
-            Thread t = new Thread(new IncrementSalaryTask(e));
-            t.start();
-            // System.out.println(e);
-        }
+        //     Thread t = new Thread(new IncrementSalaryTask(e));
+        //     t.start();
+        //     // System.out.println(e);
+        // }
     }
 
 
